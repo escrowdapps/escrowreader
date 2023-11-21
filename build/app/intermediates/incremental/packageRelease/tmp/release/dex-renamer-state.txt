@@ -1,0 +1,4 @@
+#Sun Nov 19 19:58:32 SAMT 2023
+base.0=/home/bookchain/Рабочий стол/flutterescrow/app/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
