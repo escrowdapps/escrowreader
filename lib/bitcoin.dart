@@ -24,7 +24,7 @@ Future<dynamic> getUtxo(String wallet) async {
     var box = await Hive.openBox('settings');
     dynamic utxoUrl = box.get('utxo');
     // String fullUrl = 'https://blockstream.info/testnet/api/address/wallet/utxo';
-       String fullUrl = 'https://blockstream.info/api/address/wallet/utxo';
+    String fullUrl = 'https://blockstream.info/api/address/wallet/utxo';
 
     if (utxoUrl != '' && utxoUrl != null) {
       fullUrl = utxoUrl;
@@ -68,7 +68,7 @@ dynamic bitcoin(Contract contract, String userAddress,
     return 'empty address';
   }
   dynamic addressExist = await getUtxo(userAddress);
-  if(addressExist == 404){
+  if (addressExist == 404) {
     return 'bad address';
   }
 

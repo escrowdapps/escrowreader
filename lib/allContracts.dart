@@ -9,11 +9,9 @@ import 'package:ntp/ntp.dart';
 import 'CustomAppBar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-
 class AllContracts extends StatefulWidget {
-  
   AllContracts({super.key, required this.title});
+
   final String title;
 
   @override
@@ -21,7 +19,6 @@ class AllContracts extends StatefulWidget {
 }
 
 class _AllContractsState extends State<AllContracts> {
-  
   late Future<List<dynamic>> contractsFuture;
 
   @override
@@ -29,7 +26,6 @@ class _AllContractsState extends State<AllContracts> {
     super.initState();
     contractsFuture = loadContracts();
     checkTime();
-
   }
 
   Future<List<dynamic>> loadContracts() async {
@@ -43,58 +39,41 @@ class _AllContractsState extends State<AllContracts> {
     if (await checkConection()) {
       List<dynamic> contracts = await contractsFuture;
       dynamic dateNow = await NTP.now();
-          int currentTimeMillis = dateNow.millisecondsSinceEpoch;
+      int currentTimeMillis = dateNow.millisecondsSinceEpoch;
       print(currentTimeMillis);
 
-          for (int i = 0; i < contracts.length; i++) {
-            final element = contracts[i];
-            print(element.days);
-            if (element.days < currentTimeMillis && element.uri == 'uri') {
-              await bitcoin(element, element.walletMap['address'], true);
-            }
-          }
+      for (int i = 0; i < contracts.length; i++) {
+        final element = contracts[i];
+        print(element.days);
+        if (element.days < currentTimeMillis && element.uri == 'uri') {
+          await bitcoin(element, element.walletMap['address'], true);
+        }
+      }
     }
   }
-
-
 
   Future<void> deleteContracts(Contract i) async {
     var box = await Hive.openBox<Contract>('contracts');
     box.delete(i.id);
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return 
-    
-        Scaffold(
+    return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-
-
-
-
-
-
-
-
-
-  appBar: CustomAppBar(title: 'escrow reader',),
-  
-
+      appBar: CustomAppBar(
+        title: 'escrow reader',
+      ),
       body: Container(
-
         decoration: BoxDecoration(
-
-
           image: DecorationImage(
-            image: AssetImage('assets/images/f6.png'), 
+            image: AssetImage('assets/images/f6.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.transparent
-                  .withOpacity(0.5), 
+              Colors.transparent.withOpacity(0.5),
               BlendMode.dstATop,
             ),
           ),
@@ -102,7 +81,7 @@ class _AllContractsState extends State<AllContracts> {
         child: Padding(
           padding: const EdgeInsets.all(5),
           child: Column(
-            children: <Widget>[ 
+            children: <Widget>[
               Expanded(
                 child: FutureBuilder<List<dynamic>>(
                   future: contractsFuture,
@@ -129,66 +108,57 @@ class _AllContractsState extends State<AllContracts> {
                         itemBuilder: (context, i) {
                           final contract = contracts[i];
                           return Slidable(
-                            key: UniqueKey(),
-                            closeOnScroll: true,
-                            startActionPane: ActionPane(
-                              motion: ScrollMotion(),
-                              children: [
-                                SlidableAction(
-                                  onPressed: (BuildContext context) => 
-                                      _dialogBuilder(context, contract),
-                                  backgroundColor:  Colors.red,
-                                  foregroundColor: Colors.white,
-                                  icon: Icons.delete,
-                                  label: 'delete',
-                                ),
-                              ],
-                            ),  
-                            child: Container(
-                              
-                              decoration: BoxDecoration(
-
-                                ),
-                                                            
-                              child:   
-                            Card(
-                              elevation: 5,
-                              surfaceTintColor: Colors.white,
-                              child: ListTile(
-                 
-                                title: Text(
-                                  contract.name,
-                                  style: GoogleFonts.quicksand(textStyle: TextStyle(color: Colors.black, fontSize: 25,fontWeight: FontWeight.normal))
-,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                subtitle: Text(
-                                  'dL: ${getFormatDate(contract.days).split(' ')[0]}',
-                                  style: GoogleFonts.quicksand(
+                              key: UniqueKey(),
+                              closeOnScroll: true,
+                              startActionPane: ActionPane(
+                                motion: ScrollMotion(),
+                                children: [
+                                  SlidableAction(
+                                    onPressed: (BuildContext context) =>
+                                        _dialogBuilder(context, contract),
+                                    backgroundColor: Colors.red,
+                                    foregroundColor: Colors.white,
+                                    icon: Icons.delete,
+                                    label: 'delete',
+                                  ),
+                                ],
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(),
+                                child: Card(
+                                  elevation: 5,
+                                  surfaceTintColor: Colors.white,
+                                  child: ListTile(
+                                    title: Text(
+                                      contract.name,
+                                      style: GoogleFonts.quicksand(
+                                          textStyle: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.normal)),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    subtitle: Text(
+                                        'dL: ${getFormatDate(contract.days).split(' ')[0]}',
+                                        style: GoogleFonts.quicksand(
                                             textStyle: TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 15,
-                                                fontWeight: FontWeight.normal))
-
+                                                fontWeight:
+                                                    FontWeight.normal))),
+                                    trailing: Icon(Icons.arrow_forward_ios,
+                                        color: Colors.grey),
+                                    onTap: () {
+                                      Navigator.of(context).pushNamed(
+                                          '/contractScreen',
+                                          arguments: contract);
+                                    },
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                  ),
                                 ),
-                                trailing: Icon(Icons.arrow_forward_ios,
-                                    color: Colors.grey),
-                                onTap: () {
-                                  Navigator.of(context).pushNamed(
-                                      '/contractScreen',
-                                      arguments: contract);
-                                },
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                              ),
-                            ),
-                          )
-                            
-                          
-                          
-                          
-                          );
+                              ));
                         },
                       );
                     }
@@ -202,21 +172,8 @@ class _AllContractsState extends State<AllContracts> {
         ),
       ),
     );
-  
-    
-    
-    
-    
-
-  
-  
   }
-
-
 }
-
-
-
 
 Future<void> _dialogBuilder(BuildContext context, Contract contract) {
   return showDialog<void>(
@@ -228,18 +185,15 @@ Future<void> _dialogBuilder(BuildContext context, Contract contract) {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-          ), 
+          ),
         ),
         content: Text(
           'deleting a contract permanently deletes the contract wallet and all funds stored on it.',
-          style: TextStyle(
-            fontSize: 15
-          ), 
+          style: TextStyle(fontSize: 15),
         ),
-       actions: <Widget>[
+        actions: <Widget>[
           ButtonBar(
-            alignment: MainAxisAlignment
-                .spaceBetween, 
+            alignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               TextButton(
                 style: TextButton.styleFrom(
@@ -255,19 +209,17 @@ Future<void> _dialogBuilder(BuildContext context, Contract contract) {
                   textStyle: Theme.of(context).textTheme.labelLarge,
                 ),
                 child: Text('Delete'),
-                onPressed: ()async {
-                    var box = await Hive.openBox<Contract>('contracts');
-                    box.delete(contract.id);
+                onPressed: () async {
+                  var box = await Hive.openBox<Contract>('contracts');
+                  box.delete(contract.id);
 
-                    Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/allcontracts', (route) => false);
-
-                  },  
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/allcontracts', (route) => false);
+                },
               ),
             ],
           ),
         ],
-
       );
     },
   );

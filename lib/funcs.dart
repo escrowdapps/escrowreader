@@ -3,14 +3,13 @@ import 'dart:math';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
-import 'dart:io'; 
+import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:ntp/ntp.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app/contract.dart';
-
 
 String getFormatDate(int date) {
   DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(date);
@@ -29,16 +28,16 @@ String getLocalTimeZoneOffset() {
 List<dynamic> getRandomParagraphs(String text) {
   List textFilter = text.split('\n\n').where((str) => str != "").toList();
 
-  if(textFilter.length < 3){
+  if (textFilter.length < 3) {
     textFilter = text.split(' ').where((str) => str != "").toList();
-    if(textFilter.length<3){
+    if (textFilter.length < 3) {
       textFilter = text.split('').where((str) => str != "").toList();
-      if(textFilter.length < 3){
+      if (textFilter.length < 3) {
         return [];
       }
     }
   }
-  
+
   final part = textFilter.length ~/ 3;
   final paragraphs = [];
   final random = Random();
@@ -51,10 +50,9 @@ List<dynamic> getRandomParagraphs(String text) {
   return paragraphs;
 }
 
-
 Future<dynamic> getBalance(String wallet) async {
 // url: `https://blockstream.info/testnet/api/address/${sourceAddress}/utxo`,
-try{
+  try {
     // var url = Uri.https('blockstream.info', 'testnet/api/address/$wallet/utxo');
     var url = Uri.https('blockstream.info', 'api/address/$wallet/utxo');
 
@@ -64,18 +62,16 @@ try{
     dynamic data = jsonDecode(utxo.body);
     num balance = 0;
     data.forEach((item) => {balance += item['value']});
-    if(balance<100){
+    if (balance < 100) {
       return 0;
-    }else{
-    return balance;
+    } else {
+      return balance;
     }
-}catch(e){
-  num balance = 40400000000;
-  return balance;
+  } catch (e) {
+    num balance = 40400000000;
+    return balance;
+  }
 }
-
-}
-
 
 Future<String> getFilePath() async {
   Directory directory = await getApplicationDocumentsDirectory();
@@ -85,8 +81,7 @@ Future<String> getFilePath() async {
 Future<void> saveFile(String content, String fileName) async {
   String directoryPath = await getFilePath();
   String filePath = '$directoryPath/$fileName';
-  
-  
+
   File file = File(filePath);
   await file.writeAsString(content);
 }
@@ -103,13 +98,6 @@ Future<String> readFile(fileName) async {
     return "Файл не найден";
   }
 }
-
-
-
-
-
-
-
 
 Future checkConection() async {
   final connectivityResult = await (Connectivity().checkConnectivity());
@@ -147,25 +135,20 @@ Future checkConection() async {
   return isConnect;
 }
 
-
-Future<dynamic> getTimeNTP()async{
-  try{
-    if(await checkConection()){
+Future<dynamic> getTimeNTP() async {
+  try {
+    if (await checkConection()) {
       dynamic dateNow = await NTP.now();
       return dateNow.millisecondsSinceEpoch;
-    }else{
+    } else {
       return 'no internet';
     }
-
-  }catch(e){
+  } catch (e) {
     return e;
   }
 }
 
-
-
-
-String ErrorCutBody(String errorString){
+String ErrorCutBody(String errorString) {
   int braceIndex = errorString.indexOf('{');
   String jsonString = errorString.substring(braceIndex);
   Map<String, dynamic> jsonData = json.decode(jsonString);
@@ -173,9 +156,8 @@ String ErrorCutBody(String errorString){
   return errorMessage;
 }
 
-
 Future<Box> openEncryptedBoxContracts() async {
-    AndroidOptions _getAndroidOptions() => const AndroidOptions(
+  AndroidOptions _getAndroidOptions() => const AndroidOptions(
         encryptedSharedPreferences: true,
       );
   final secureStorage = FlutterSecureStorage(aOptions: _getAndroidOptions());
@@ -191,7 +173,6 @@ Future<Box> openEncryptedBoxContracts() async {
 
   final key = await secureStorage.read(key: 'key');
   final encryptionKeyUint8List = base64Url.decode(key!);
-
 
   return await Hive.openBox<Contract>('contracts',
       encryptionCipher: HiveAesCipher(encryptionKeyUint8List));
