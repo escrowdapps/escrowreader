@@ -11,6 +11,9 @@ class Utils {
     return formattedDate;
   }
 
+  /// приводит int к строке даты
+  /// первый аргумент timestamp
+  /// второй формат
   static String getDateFromTimestamp(int timestamp, String format) {
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
     DateFormat formatter = DateFormat(format);
