@@ -12,4 +12,4 @@ If you don't find any checkpoints, then you can delete the application on the ev
 The Escrow reader code is open, its behavior is absolutely predictable and does not imply any other possibility of interaction with money.
 
 
-скачать приложение (build/app/outputs/flutter-apk/app-debug.apk)
+download application (build/app/outputs/flutter-apk/app-debug.apk)
