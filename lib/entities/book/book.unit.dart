@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 
-import 'package:app/entities/book.dart';
+import 'package:app/entities/book/book.dart';
 
 void main() {
   test('Book', () async {

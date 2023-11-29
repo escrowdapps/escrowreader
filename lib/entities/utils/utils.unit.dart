@@ -1,4 +1,4 @@
-import 'package:app/entities/utils.dart';
+import 'package:app/entities/utils/utils.dart';
 import 'package:test/test.dart';
 
 void main() {
