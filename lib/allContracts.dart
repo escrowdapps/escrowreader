@@ -10,7 +10,7 @@ import 'CustomAppBar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AllContracts extends StatefulWidget {
-  AllContracts({super.key, required this.title});
+  const AllContracts({super.key, required this.title});
 
   final String title;
 
@@ -64,13 +64,13 @@ class _AllContractsState extends State<AllContracts> {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: 'escrow reader',
       ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/f6.png'),
+            image: const AssetImage('assets/images/f6.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               Colors.transparent.withOpacity(0.5),
@@ -87,7 +87,7 @@ class _AllContractsState extends State<AllContracts> {
                   future: contractsFuture,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.white,
                         ),
@@ -98,8 +98,8 @@ class _AllContractsState extends State<AllContracts> {
                       );
                     } else if (snapshot.hasData) {
                       final contracts = snapshot.data!;
-                      if (contracts.length == 0) {
-                        return Center(
+                      if (contracts.isEmpty) {
+                        return const Center(
                           child: Text('no contracts'),
                         );
                       }
@@ -124,7 +124,7 @@ class _AllContractsState extends State<AllContracts> {
                                 ],
                               ),
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Card(
                                   elevation: 5,
                                   surfaceTintColor: Colors.white,
@@ -132,7 +132,7 @@ class _AllContractsState extends State<AllContracts> {
                                     title: Text(
                                       contract.name,
                                       style: GoogleFonts.quicksand(
-                                          textStyle: TextStyle(
+                                          textStyle: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 25,
                                               fontWeight: FontWeight.normal)),
@@ -141,12 +141,13 @@ class _AllContractsState extends State<AllContracts> {
                                     subtitle: Text(
                                         'dL: ${getFormatDate(contract.days).split(' ')[0]}',
                                         style: GoogleFonts.quicksand(
-                                            textStyle: TextStyle(
+                                            textStyle: const TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 15,
                                                 fontWeight:
                                                     FontWeight.normal))),
-                                    trailing: Icon(Icons.arrow_forward_ios,
+                                    trailing: const Icon(
+                                        Icons.arrow_forward_ios,
                                         color: Colors.grey),
                                     onTap: () {
                                       Navigator.of(context).pushNamed(
@@ -166,7 +167,7 @@ class _AllContractsState extends State<AllContracts> {
                   },
                 ),
               ),
-              bottomCreate()
+              const bottomCreate()
             ],
           ),
         ),
@@ -187,7 +188,7 @@ Future<void> _dialogBuilder(BuildContext context, Contract contract) {
             fontWeight: FontWeight.bold,
           ),
         ),
-        content: Text(
+        content: const Text(
           'deleting a contract permanently deletes the contract wallet and all funds stored on it.',
           style: TextStyle(fontSize: 15),
         ),
@@ -199,7 +200,7 @@ Future<void> _dialogBuilder(BuildContext context, Contract contract) {
                 style: TextButton.styleFrom(
                   textStyle: Theme.of(context).textTheme.labelLarge,
                 ),
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -208,7 +209,7 @@ Future<void> _dialogBuilder(BuildContext context, Contract contract) {
                 style: TextButton.styleFrom(
                   textStyle: Theme.of(context).textTheme.labelLarge,
                 ),
-                child: Text('Delete'),
+                child: const Text('Delete'),
                 onPressed: () async {
                   var box = await Hive.openBox<Contract>('contracts');
                   box.delete(contract.id);
