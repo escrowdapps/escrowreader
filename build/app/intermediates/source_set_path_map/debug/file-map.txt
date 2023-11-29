@@ -1,17 +1,17 @@
-com.example.app-jetified-window-1.0.0-beta04-0 /home/bookchain/.gradle/caches/transforms-3/25cee5f028ac2a6b79fd6278ff5b59e2/transformed/jetified-window-1.0.0-beta04/res
-com.example.app-jetified-security-crypto-1.1.0-alpha06-1 /home/bookchain/.gradle/caches/transforms-3/2dd5e7ab9230030ff78143f5215ea597/transformed/jetified-security-crypto-1.1.0-alpha06/res
-com.example.app-jetified-annotation-experimental-1.1.0-2 /home/bookchain/.gradle/caches/transforms-3/6c0c163cc77ae6c91f9f7dfcd179c29c/transformed/jetified-annotation-experimental-1.1.0/res
-com.example.app-core-1.6.0-3 /home/bookchain/.gradle/caches/transforms-3/7e9df2ac2213a6bd3cef0f2f27870d79/transformed/core-1.6.0/res
-com.example.app-jetified-window-java-1.0.0-beta04-4 /home/bookchain/.gradle/caches/transforms-3/ae81e06d24c799147c26814497a2a305/transformed/jetified-window-java-1.0.0-beta04/res
-com.example.app-debug-5 /home/bookchain/Рабочий стол/flutterescrow/app/android/app/src/debug/res
-com.example.app-main-6 /home/bookchain/Рабочий стол/flutterescrow/app/android/app/src/main/res
-com.example.app-pngs-7 /home/bookchain/Рабочий стол/flutterescrow/app/build/app/generated/res/pngs/debug
-com.example.app-resValues-8 /home/bookchain/Рабочий стол/flutterescrow/app/build/app/generated/res/resValues/debug
-com.example.app-rs-9 /home/bookchain/Рабочий стол/flutterescrow/app/build/app/generated/res/rs/debug
-com.example.app-mergeDebugResources-10 /home/bookchain/Рабочий стол/flutterescrow/app/build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir
-com.example.app-mergeDebugResources-11 /home/bookchain/Рабочий стол/flutterescrow/app/build/app/intermediates/incremental/debug/mergeDebugResources/stripped.dir
-com.example.app-merged_res-12 /home/bookchain/Рабочий стол/flutterescrow/app/build/app/intermediates/merged_res/debug
-com.example.app-packaged_res-13 /home/bookchain/Рабочий стол/flutterescrow/app/build/connectivity_plus/intermediates/packaged_res/debug
-com.example.app-packaged_res-14 /home/bookchain/Рабочий стол/flutterescrow/app/build/file_selector_android/intermediates/packaged_res/debug
-com.example.app-packaged_res-15 /home/bookchain/Рабочий стол/flutterescrow/app/build/flutter_secure_storage/intermediates/packaged_res/debug
-com.example.app-packaged_res-16 /home/bookchain/Рабочий стол/flutterescrow/app/build/path_provider_android/intermediates/packaged_res/debug
+com.example.app-jetified-window-1.0.0-beta04-0 /home/user/.gradle/caches/transforms-3/25cee5f028ac2a6b79fd6278ff5b59e2/transformed/jetified-window-1.0.0-beta04/res
+com.example.app-jetified-security-crypto-1.1.0-alpha06-1 /home/user/.gradle/caches/transforms-3/2dd5e7ab9230030ff78143f5215ea597/transformed/jetified-security-crypto-1.1.0-alpha06/res
+com.example.app-jetified-annotation-experimental-1.1.0-2 /home/user/.gradle/caches/transforms-3/6c0c163cc77ae6c91f9f7dfcd179c29c/transformed/jetified-annotation-experimental-1.1.0/res
+com.example.app-core-1.6.0-3 /home/user/.gradle/caches/transforms-3/7e9df2ac2213a6bd3cef0f2f27870d79/transformed/core-1.6.0/res
+com.example.app-jetified-window-java-1.0.0-beta04-4 /home/user/.gradle/caches/transforms-3/ae81e06d24c799147c26814497a2a305/transformed/jetified-window-java-1.0.0-beta04/res
+com.example.app-debug-5 /home/user/work/escrowreader/android/app/src/debug/res
+com.example.app-main-6 /home/user/work/escrowreader/android/app/src/main/res
+com.example.app-pngs-7 /home/user/work/escrowreader/build/app/generated/res/pngs/debug
+com.example.app-resValues-8 /home/user/work/escrowreader/build/app/generated/res/resValues/debug
+com.example.app-rs-9 /home/user/work/escrowreader/build/app/generated/res/rs/debug
+com.example.app-mergeDebugResources-10 /home/user/work/escrowreader/build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir
+com.example.app-mergeDebugResources-11 /home/user/work/escrowreader/build/app/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+com.example.app-merged_res-12 /home/user/work/escrowreader/build/app/intermediates/merged_res/debug
+com.example.app-packaged_res-13 /home/user/work/escrowreader/build/connectivity_plus/intermediates/packaged_res/debug
+com.example.app-packaged_res-14 /home/user/work/escrowreader/build/file_selector_android/intermediates/packaged_res/debug
+com.example.app-packaged_res-15 /home/user/work/escrowreader/build/flutter_secure_storage/intermediates/packaged_res/debug
+com.example.app-packaged_res-16 /home/user/work/escrowreader/build/path_provider_android/intermediates/packaged_res/debug
