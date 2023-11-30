@@ -1,6 +1,4 @@
-import 'dart:io';
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
 
 class Utils {
   static String timestampToDate(int timestamp) {
@@ -21,11 +19,5 @@ class Utils {
     DateFormat formatter = DateFormat(format);
 
     return formatter.format(dateTime);
-  }
-
-  /// получает и возвращает директорию с документами
-  static Future<String> getDocumentsPath() async {
-    Directory directory = await getApplicationDocumentsDirectory();
-    return directory.path;
   }
 }
