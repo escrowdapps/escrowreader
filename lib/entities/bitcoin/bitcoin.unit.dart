@@ -34,4 +34,11 @@ void main() {
 
     expect(utxList, isNotEmpty);
   });
+
+  test('get fee from bitcoin main net', () async {
+    int fee = await Bitcoin.getFee();
+
+    expect(fee, isA<int>());
+    expect(fee, greaterThanOrEqualTo(0));
+  });
 }

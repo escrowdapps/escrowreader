@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:app/DTOs/Response/FeeResponseDTO.dart';
 import 'package:app/DTOs/Response/UTXO.dart';
 import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 
 class Bitcoin {
   static const String HIVE_SETTINGS_KEY = 'settings';
+  static Uri FEE_ENDPOINT_URL =
+  Uri.parse('https://api.blockcypher.com/v1/btc/main');
 
   static Uri BLOCKSTREAM_URL = Uri(
       scheme: 'https',
@@ -31,7 +34,7 @@ class Bitcoin {
 
     if (walletId.isNotEmpty) {
       Uri url =
-          Bitcoin.BLOCKSTREAM_URL.replace(path: 'api/address/$walletId/utxo');
+      Bitcoin.BLOCKSTREAM_URL.replace(path: 'api/address/$walletId/utxo');
 
       return url;
     }
@@ -58,6 +61,20 @@ class Bitcoin {
       }
 
       return list;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<int> getFee() async {
+    try {
+      http.Response response = await http.get(Bitcoin.FEE_ENDPOINT_URL);
+
+      final parsedJSON = jsonDecode(response.body);
+
+      FeeResponseDTO feeResponse = FeeResponseDTO.fromJSON(parsedJSON);
+
+      return feeResponse.fee;
     } catch (e) {
       rethrow;
     }
