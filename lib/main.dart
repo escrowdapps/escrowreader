@@ -8,6 +8,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'allContracts.dart';
 import 'contractScreen.dart';
 import 'read.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'funcs.dart';
 
 void main() async {
@@ -25,12 +26,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: MaterialApp(
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [Locale('ru'), Locale('en')],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       title: 'Flutter Demo',
       theme: ThemeData(
           iconTheme: IconThemeData(color: Colors.white),
