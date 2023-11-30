@@ -1,3 +1,8 @@
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:app/DTOs/Response/UTXO.dart';
+import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 
 class Bitcoin {
@@ -18,7 +23,8 @@ class Bitcoin {
     }
 
     if (customUrl != null) {
-      Uri url = customUrl.replace(path: 'api/address/$walletId/utxo');
+      Uri url = customUrl.replace(
+          path: customUrl.path.replaceFirst('wallet', walletId));
 
       return url;
     }
@@ -31,5 +37,29 @@ class Bitcoin {
     }
 
     return null;
+  }
+
+  static Future<List<UtxoDTO>> getTransactions(
+      {required String walletId, Uri? customUrl}) async {
+    List<UtxoDTO> list = [];
+    Uri? requestUri = getReplacedUri(walletId: walletId, customUrl: customUrl);
+
+    if (requestUri == null) {
+      throw const FormatException('can not create uri');
+    }
+
+    try {
+      http.Response response = await http.get(requestUri);
+
+      final parsedJSON = jsonDecode(response.body);
+
+      for (var item in parsedJSON) {
+        list.add(UtxoDTO.fromJSON(item));
+      }
+
+      return list;
+    } catch (e) {
+      rethrow;
+    }
   }
 }
