@@ -8,7 +8,12 @@ void main() {
 
     Uri testUri = Uri(scheme: 'https', host: 'google.com', path: 'wallet/test');
 
-    expect(Bitcoin.getReplacedUri(customUrl: testUri, walletId: 'test-wallet').toString(),
+    expect(
+        Bitcoin.getReplacedUri(customUrl: testUri, walletId: 'test-wallet')
+            .toString(),
         equals('https://google.com/api/address/test-wallet/utxo'));
+
+    expect(() => Bitcoin.getReplacedUri(customUrl: testUri),
+        throwsFormatException);
   });
 }
