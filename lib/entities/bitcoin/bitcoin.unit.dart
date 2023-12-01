@@ -13,9 +13,6 @@ void main() {
         Bitcoin.getReplacedUri(customUrl: testUri, walletId: 'test-wallet')
             .toString(),
         equals('https://google.com/test-wallet/test'));
-
-    expect(() => Bitcoin.getReplacedUri(customUrl: testUri),
-        throwsFormatException);
   });
 
   test('return error with wrong bitcoin address', () async {

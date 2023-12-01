@@ -9,7 +9,7 @@ import 'package:hive/hive.dart';
 class Bitcoin {
   static const String HIVE_SETTINGS_KEY = 'settings';
   static Uri FEE_ENDPOINT_URL =
-  Uri.parse('https://api.blockcypher.com/v1/btc/main');
+      Uri.parse('https://api.blockcypher.com/v1/btc/main');
 
   static Uri BLOCKSTREAM_URL = Uri(
       scheme: 'https',
@@ -20,11 +20,7 @@ class Bitcoin {
     // var box = await Hive.openBox(HIVE_SETTINGS_KEY);
   }
 
-  static Uri? getReplacedUri({String walletId = '', Uri? customUrl}) {
-    if (walletId.isEmpty) {
-      throw const FormatException('wallet id not passed');
-    }
-
+  static Uri? getReplacedUri({required String walletId, Uri? customUrl}) {
     if (customUrl != null) {
       Uri url = customUrl.replace(
           path: customUrl.path.replaceFirst('wallet', walletId));
@@ -34,7 +30,7 @@ class Bitcoin {
 
     if (walletId.isNotEmpty) {
       Uri url =
-      Bitcoin.BLOCKSTREAM_URL.replace(path: 'api/address/$walletId/utxo');
+          Bitcoin.BLOCKSTREAM_URL.replace(path: 'api/address/$walletId/utxo');
 
       return url;
     }
