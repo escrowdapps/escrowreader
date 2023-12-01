@@ -1,3 +1,5 @@
+import 'package:connectivity_plus/connectivity_plus.dart'
+    show Connectivity, ConnectivityResult;
 import 'package:intl/intl.dart';
 
 class Utils {
@@ -19,5 +21,16 @@ class Utils {
     DateFormat formatter = DateFormat(format);
 
     return formatter.format(dateTime);
+  }
+
+  static Future<bool> checkConnection() async {
+    ConnectivityResult connect = await Connectivity().checkConnectivity();
+
+    switch (connect) {
+      case ConnectivityResult.none:
+        return false;
+      default:
+        return true;
+    }
   }
 }

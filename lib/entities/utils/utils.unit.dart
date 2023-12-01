@@ -1,6 +1,10 @@
 import 'package:app/entities/utils/utils.dart';
 import 'package:test/test.dart';
+import 'package:connectivity_plus/connectivity_plus.dart'
+    show Connectivity, ConnectivityResult;
+import 'package:mockito/annotations.dart';
 
+@GenerateMocks([Connectivity, ConnectivityResult])
 void main() {
   test('Utils.timestampToDate', () {
     String datetime = Utils.timestampToDate(1700592163411);
