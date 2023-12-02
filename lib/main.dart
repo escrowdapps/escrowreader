@@ -1,7 +1,10 @@
 // -*- coding: utf-8 -*-
 
 import 'package:app/contract.dart';
+import 'package:app/routes.dart';
 import 'package:app/spravka.dart';
+import 'package:app/theme.dart';
+import 'package:app/widgets/contract_creator/contract_creator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -26,37 +29,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-          iconTheme: IconThemeData(color: Colors.white),
-          dividerColor: Colors.grey,
-          appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
-          useMaterial3: true,
-          textTheme: const TextTheme(
-            bodyMedium: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-              fontSize: 20,
-            ),
-            titleSmall: TextStyle(
-              color: Colors.grey,
-              fontWeight: FontWeight.w200,
-              fontSize: 13,
-            ),
-            displayLarge: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-            ),
-          )),
-      routes: {
-        '/allcontracts': (context) => AllContracts(title: 'escrow reader'),
-        '/contractScreen': (context) => ContractScreen(),
-        '/read': (context) => Read(),
-        '/spravka': (context) => Spravka(),
-      },
-      initialRoute: '/allcontracts',
-    ));
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          title: 'Flutter Demo',
+          theme: EscrowAppTheme,
+          routes: {
+        Routes.allContracts: (context) => const AllContracts(title: 'escrow reader'),
+        Routes.contract: (context) => ContractScreen(),
+        Routes.read: (context) => Read(),
+        Routes.info: (context) => Spravka(),
+        },
+          initialRoute: Routes.allContracts,
+        ));
   }
 }
