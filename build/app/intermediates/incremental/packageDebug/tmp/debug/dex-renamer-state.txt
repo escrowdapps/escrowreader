@@ -1,4 +1,0 @@
-#Tue Nov 21 20:50:40 SAMT 2023
-base.0=/home/bookchain/Рабочий стол/flutterescrow/app/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-renamed.0=classes.dex
-path.0=classes.dex
