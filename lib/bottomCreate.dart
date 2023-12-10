@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:app/contract.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -7,6 +8,8 @@ import 'package:file_selector/file_selector.dart';
 import 'dart:convert';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:windows1251/windows1251.dart';
+
 
 class bottomCreate extends StatefulWidget {
   const bottomCreate({Key? key}) : super(key: key);
@@ -52,11 +55,17 @@ class _bottomCreateState extends State<bottomCreate> {
     final XFile? file =
         await openFile(acceptedTypeGroups: <XTypeGroup>[typeGroup]);
       if (file != null) {
-      List<int> bytes = await file.readAsBytes();
-      String text = utf8.decode(bytes);
-      
+      Uint8List bytes = await file.readAsBytes();
+      late String text;
 
-      paragraphs = getRandomParagraphs(text); 
+      try {
+        text = utf8.decode(bytes);
+      } catch (e) {
+        text = windows1251.decode(bytes, allowInvalid: false);
+      }
+
+
+      paragraphs = getRandomParagraphs(text);
       if(paragraphs.length == 0){
         textAlert = 'text too small';
       }else{
@@ -166,10 +175,10 @@ class _bottomCreateState extends State<bottomCreate> {
             children: <Widget>[
               Expanded(
                 child: FractionallySizedBox(
-                  widthFactor: 0.80, 
+                  widthFactor: 0.80,
                   child: ElevatedButton(
                     child:
-                        AutoSizeText('document', 
+                        AutoSizeText('document',
                          style: GoogleFonts.quicksand(
                                             textStyle: TextStyle(
                                                 color: Colors.black,
@@ -189,11 +198,11 @@ class _bottomCreateState extends State<bottomCreate> {
                       surfaceTintColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(0.0),
-                      ),  
+                      ),
                       side: BorderSide(
                         color: Color.fromARGB(255, 185, 185, 185), // Цвет границы
-                        width: 1.0, 
-                      ),  
+                        width: 1.0,
+                      ),
                     ),
                   ),
                 ),
@@ -212,7 +221,7 @@ class _bottomCreateState extends State<bottomCreate> {
                               ),
                     onPressed: _selectDate,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white, 
+                      backgroundColor: Colors.white,
                       elevation: 3,
                       foregroundColor: Colors.grey,
                       disabledForegroundColor: Colors.white,
@@ -224,9 +233,9 @@ class _bottomCreateState extends State<bottomCreate> {
                       ),
                                       side: BorderSide(
                         color:
-                            Color.fromARGB(255, 185, 185, 185), 
-                        width: 1.0, 
-                      ), 
+                            Color.fromARGB(255, 185, 185, 185),
+                        width: 1.0,
+                      ),
                       ),
 
                   ),
@@ -235,11 +244,11 @@ class _bottomCreateState extends State<bottomCreate> {
             ],
           ),
           Divider(
-            color: Colors.white, 
-            thickness: 0, 
+            color: Colors.white,
+            thickness: 0,
           ),
           FractionallySizedBox(
-            widthFactor: 0.9, 
+            widthFactor: 0.9,
 
             child: ElevatedButton(
               onPressed: () async {
@@ -268,7 +277,7 @@ class _bottomCreateState extends State<bottomCreate> {
                           fontWeight: FontWeight.normal))
                   ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, 
+                backgroundColor: Colors.white,
                 elevation: 3,
                 foregroundColor: Colors.grey,
                 disabledForegroundColor: Colors.white,
@@ -277,11 +286,11 @@ class _bottomCreateState extends State<bottomCreate> {
                 surfaceTintColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(0.0),
-                ),  
+                ),
                 side: BorderSide(
-                  color: Color.fromARGB(255, 185, 185, 185), 
-                  width: 1.0, 
-                ), 
+                  color: Color.fromARGB(255, 185, 185, 185),
+                  width: 1.0,
+                ),
               ),
             ),
           ),
